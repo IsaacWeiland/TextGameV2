@@ -11,10 +11,8 @@ class Program
         string pn1 = Pronoun(sex);
         Console.WriteLine($"{playerName}, you are a {sex}.\nThat's a lovely one isn't {pn1}.");
         string affinity = "0";
-        Console.WriteLine("Dummy text.\n[1] I like your hair.\n[2] Your hair sucks.\n[3] Say nothing");
-        affinity = AnswerMath(affinity);
-        Console.WriteLine($"{affinity}");
-        
+        Nekomata(affinity);
+
     }
     
 
@@ -67,7 +65,7 @@ class Program
             response = int.Parse(Console.ReadLine());
             if (response == 1)
             {
-                Console.WriteLine("Thank you!");
+                Console.WriteLine("Friends? Sure! Don't think it'll be that easy though.");
                 int parseAff = int.Parse(affinity);
                 parseAff++;
                 return $"{parseAff}";
@@ -75,7 +73,7 @@ class Program
 
             if (response == 2)
             {
-                Console.WriteLine("That was rude!");
+                Console.WriteLine("A date? *Chuckles* As if I'd go out with you!");
                 int parseAff = int.Parse(affinity);
                 parseAff--;
                 return $"{parseAff}";
@@ -83,12 +81,21 @@ class Program
 
             if (response == 3)
             {
-                Console.WriteLine("(You said nothing).");
+                Console.WriteLine("Allies? Do you want me to die for you or something?.");
                 return affinity;
             }
             else Console.WriteLine("Invalid answer\nPlease enter a valid answer.");
         } while (response != null);
 
+        return "complete";
+    }
+
+    public static string Nekomata(string affinity)
+    {
+        Console.WriteLine("(You approached the Nekomata).\nOh a human! But... what could you want with me?\n[1] Ask to" +
+                          " be friends.\n[2] Ask to go on a date with her.\n[3] Ask to be allies.");
+        affinity = AnswerMath(affinity);
+        Console.WriteLine($"{affinity}");
         return "complete";
     }
 }
