@@ -4,14 +4,20 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Welcome to the game!\nPlease enter your name.");
-        string playerName = Console.ReadLine();
-        Console.WriteLine("Please enter your gender\n[1] Male\n[2] Female");
-        string sex = Sex();
-        string pn1 = Pronoun(sex);
-        Console.WriteLine($"{playerName}, you are a {sex}.\nThat's a lovely one isn't {pn1}.");
-        string affinity = "0";
-        Nekomata(affinity);
+        // Console.WriteLine("Welcome to the game!\nPlease enter your name.");
+        // string playerName = Console.ReadLine();
+        // Console.WriteLine("Please enter your gender\n[1] Male\n[2] Female");
+        // string sex = Sex();
+        // string pn1 = Pronoun(sex);
+        // Console.WriteLine($"{playerName}, you are a {sex}.\nThat's a lovely one isn't {pn1}.");
+        // string affinity = "0";
+        int[] getLuck = { 1, 2, 3, 4, 5 };
+        for(int i = 0; i < 5; i++)
+        {
+            int nextResponse = QuestionGen(getLuck);
+            DialogueTree(nextResponse);
+        }
+        // Nekomata(affinity);
 
     }
     
@@ -98,4 +104,41 @@ class Program
         Console.WriteLine($"{affinity}");
         return "complete";
     }
+
+    public static int QuestionGen(int[] findLuck)
+    {
+        Random r = new Random();
+        int randNum = r.Next(0, 5);
+        // findLuck[randNum];
+        int luckFound = findLuck[randNum];
+        do
+        {
+            randNum = r.Next(0, 5);
+            luckFound = findLuck[randNum];
+        } while (luckFound == 0);
+        findLuck[randNum] = 0;
+        return luckFound;
+    }//RNG that chooses which dialogue is said next.
+
+    public static void DialogueTree(int nextResponse)
+    {
+        switch (nextResponse)//TODO Write dialogue in here
+        {
+            case 1:
+                Console.WriteLine("Dummy 1");
+                break;
+            case 2:
+                Console.WriteLine("Dummy 2");
+                break;
+            case 3:
+                Console.WriteLine("Dummy 3");
+                break;
+            case 4:
+                Console.WriteLine("Dummy 4");
+                break;
+            case 5:
+                Console.WriteLine("Dummy 5");
+                break;
+        }
+    }//Tree for dialogue to
 }
