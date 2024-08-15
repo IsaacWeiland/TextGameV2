@@ -111,11 +111,11 @@ class Program
         int randNum = r.Next(0, 5);
         // findLuck[randNum];
         int luckFound = findLuck[randNum];
-        do
+        while (luckFound == 0)
         {
-            randNum = r.Next(0, 5);
+            randNum = r.Next(0, 5);     //r.Next is added here, so it doesn't infinite loop num assignment
             luckFound = findLuck[randNum];
-        } while (luckFound == 0);
+        }        //while loop so no option is repeated 
         findLuck[randNum] = 0;
         return luckFound;
     }//RNG that chooses which dialogue is said next.
