@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "1hAgjrxtfIG8hzXbp8OjP9scumEnp/VxjXePEp8XoIiMzX1CjiLnnS4Y30C1vJO1AcH7qbS2VLm/1rNRaH/Cug==",
+  "dgSpecHash": "Z1764w/5wx2t0xlq5/LjDzrtB6JH+KbfXSDGgeZ079Lu6Hwsf4V3aQdnDgjKWXPXWMsW/yminDKMXxao2X5OZQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\0ni\\Desktop\\repos\\TextGame2\\TextGame2\\TextGame2.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\0ni\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.20\\microsoft.netcore.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\0ni\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.20\\microsoft.windowsdesktop.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\0ni\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.20\\microsoft.aspnetcore.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\0ni\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.20\\microsoft.netcore.app.host.win-x64.7.0.20.nupkg.sha512"
+  ],
   "logs": []
 }

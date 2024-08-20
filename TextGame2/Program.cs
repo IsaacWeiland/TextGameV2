@@ -1,4 +1,10 @@
-﻿namespace TextGame2;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Diagnostics;
+
+namespace TextGame2;
+
 
 class Program
 {
@@ -10,19 +16,12 @@ class Program
         // string sex = Sex();
         // string pn1 = Pronoun(sex);
         // Console.WriteLine($"{playerName}, you are a {sex}.\nThat's a lovely one isn't {pn1}.");
-        // string affinity = "0";
-        int[] getLuck = { 1, 2, 3, 4, 5 };
-        for(int i = 0; i < 5; i++)
-        {
-            int nextResponse = QuestionGen(getLuck);
-            DialogueTree(nextResponse);
-        }
-        // Nekomata(affinity);
+        List<int> alignment = new List<int>();
+        Nekomata(alignment);
 
     }
-    
 
-    public static string Sex() //asks user for gender
+    public static string Sex() //asks user for gender, currently unused
     {
         string ans;
         do
@@ -42,7 +41,7 @@ class Program
         return ans;
     }
 
-    public static string Pronoun(string a)
+    public static string Pronoun(string a)//code for player pronouns, currently unused
     {
         string pn1 = a; 
         switch (pn1)
@@ -62,83 +61,187 @@ class Program
             }
         }
     }
-
-    public static string AnswerMath(string affinity)
-    {
-        int response;
-        do
-        {
-            response = int.Parse(Console.ReadLine());
-            if (response == 1)
-            {
-                Console.WriteLine("Friends? Sure! Don't think it'll be that easy though.");
-                int parseAff = int.Parse(affinity);
-                parseAff++;
-                return $"{parseAff}";
-            }
-
-            if (response == 2)
-            {
-                Console.WriteLine("A date? *Chuckles* As if I'd go out with you!");
-                int parseAff = int.Parse(affinity);
-                parseAff--;
-                return $"{parseAff}";
-            }
-
-            if (response == 3)
-            {
-                Console.WriteLine("Allies? Do you want me to die for you or something?.");
-                return affinity;
-            }
-            else Console.WriteLine("Invalid answer\nPlease enter a valid answer.");
-        } while (response != null);
-
-        return "complete";
-    }
-
-    public static string Nekomata(string affinity)
-    {
-        Console.WriteLine("(You approached the Nekomata).\nOh a human! But... what could you want with me?\n[1] Ask to" +
-                          " be friends.\n[2] Ask to go on a date with her.\n[3] Ask to be allies.");
-        affinity = AnswerMath(affinity);
-        Console.WriteLine($"{affinity}");
-        return "complete";
-    }
-
+    
     public static int QuestionGen(int[] findLuck)
     {
         Random r = new Random();
-        int randNum = r.Next(0, 5);
+        int randNum = r.Next(1, 5);
         // findLuck[randNum];
         int luckFound = findLuck[randNum];
         while (luckFound == 0)
         {
-            randNum = r.Next(0, 5);     //r.Next is added here, so it doesn't infinite loop num assignment
+            randNum = r.Next(1, 5);     //r.Next is added here, so it doesn't infinite loop num assignment
             luckFound = findLuck[randNum];
         }        //while loop so no option is repeated 
         findLuck[randNum] = 0;
         return luckFound;
     }//RNG that chooses which dialogue is said next.
-
-    public static void DialogueTree(int nextResponse)
+    public static int UserInputParse() // Tries to parse user input and returns number value 1 - 3.
     {
-        switch (nextResponse)//TODO Write dialogue in here
+        int choiceOut = 0;
+        var inputSuccess = int.TryParse(Console.ReadLine(), out int parseSucceed);
+
+        while (!inputSuccess || parseSucceed > 3 || parseSucceed < 1)
         {
-            case 1:
-                Console.WriteLine("Dummy 1");
-                break;
-            case 2:
-                Console.WriteLine("Dummy 2");
-                break;
-            case 3:
-                Console.WriteLine("Dummy 3");
-                break;
-            case 4:
-                Console.WriteLine("Dummy 4");
-                break;
-            case 5:
-                Console.WriteLine("Dummy 5");
-                break;
+            Console.WriteLine("Please enter a number 1 - 3.");
+            inputSuccess = int.TryParse(Console.ReadLine(), out parseSucceed);
         }
-    }//Tree for dialogue to
+
+        choiceOut = parseSucceed;
+        return choiceOut;
+
+    }
+
+    public static void Nekomata(List<int> currentAlignment)
+    {
+        int[] getLuck = { 1, 2, 3, 4, 5 };
+        int affinity = 50;
+        while (affinity > 0 && affinity <= 100)
+        {
+            int nextResponse = QuestionGen(getLuck);
+            int getResponse;
+            switch (nextResponse) //TODO Write dialogue in here, Change answer properties
+            {
+                case 1:
+                    Console.WriteLine("Dummy 1");
+                    Console.WriteLine("Dummy asnwer1\nDummy answer2\nDummy Answer 3");
+                    getResponse = UserInputParse();
+                    if (getResponse == 1)
+                    {
+                        Console.WriteLine("Alignment Up!");
+                        currentAlignment.Add(1);
+                    }
+                    else if (getResponse == 2)
+                    {
+                        Console.WriteLine("Alignment Down!");
+                        currentAlignment.Add(-1);
+                        affinity += 25;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Alignment Neutral");
+                        currentAlignment.Add(0);
+                        affinity -= 10;
+                    }
+
+                    break;
+                case 2:
+                    Console.WriteLine("Dummy 2");
+                    Console.WriteLine("Dummy asnwer1\nDummy answer2\nDummy Answer 3");
+                    getResponse = UserInputParse();
+                    if (getResponse == 1)
+                    {
+                        Console.WriteLine("Alignment Up!");
+                        currentAlignment.Add(1);
+                    }
+                    else if (getResponse == 2)
+                    {
+                        Console.WriteLine("Alignment Down!");
+                        currentAlignment.Add(-1);
+                        affinity += 25;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Alignment Neutral");
+                        currentAlignment.Add(0);
+                        affinity -= 10;
+                    }
+
+                    break;
+                case 3:
+                    Console.WriteLine("Dummy 3");
+                    Console.WriteLine("Dummy asnwer1\nDummy answer2\nDummy Answer 3");
+                    getResponse = UserInputParse();
+                    if (getResponse == 1)
+                    {
+                        Console.WriteLine("Alignment Up!");
+                        currentAlignment.Add(1);
+                    }
+                    else if (getResponse == 2)
+                    {
+                        Console.WriteLine("Alignment Down!");
+                        currentAlignment.Add(-1);
+                        affinity += 25;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Alignment Neutral");
+                        currentAlignment.Add(0);
+                        affinity -= 10;
+                    }
+
+                    break;
+                case 4:
+                    Console.WriteLine("Dummy 4");
+                    Console.WriteLine("Dummy asnwer1\nDummy answer2\nDummy Answer 3");
+                    getResponse = UserInputParse();
+                    if (getResponse == 1)
+                    {
+                        Console.WriteLine("Alignment Up!");
+                        currentAlignment.Add(1);
+                    }
+                    else if (getResponse == 2)
+                    {
+                        Console.WriteLine("Alignment Down!");
+                        currentAlignment.Add(-1);
+                        affinity += 25;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Alignment Neutral");
+                        currentAlignment.Add(0);
+                        affinity -= 10;
+                    }
+
+                    break;
+                case 5:
+                    Console.WriteLine("Dummy 5");
+                    Console.WriteLine("Dummy asnwer1\nDummy answer2\nDummy Answer 3");
+                    getResponse = UserInputParse();
+                    if (getResponse == 1)
+                    {
+                        Console.WriteLine("Alignment Up!");
+                        currentAlignment.Add(1);
+                    }
+                    else if (getResponse == 2)
+                    {
+                        Console.WriteLine("Alignment Down!");
+                        currentAlignment.Add(-1);
+                        affinity += 25;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Alignment Neutral");
+                        currentAlignment.Add(0);
+                        affinity -= 10;
+                    }
+                    break;
+            }
+        }
+
+        int addedAlignment = AlignMath(currentAlignment);
+        if (addedAlignment > 1 && affinity > 0)
+        {
+            Console.WriteLine("Law ending");
+        }
+        else if (affinity >= 100)
+        {
+            Console.WriteLine("Neutral Date ending\nEnjoy your catgirl demon gf!");
+        }
+        else
+        {
+            Console.WriteLine("Bad ending\nYou really suck.");
+        }
+    }//probably will end up being the main copy-paste for most script in the game.
+
+    public static int AlignMath(List<int> toCalc)
+    {
+        int output = 0;
+        foreach (var change in toCalc)
+        {
+            output += change;
+        }
+
+        return output;
+    }//takes alignment to be calculated for later
 }
